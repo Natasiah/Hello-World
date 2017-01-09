@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Appsaya</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/ionic.css">
+
+ <script type="text/javascript" src="js/jquery.js"></script>
+     <script type="text/javascript" src="js/geturi.js"></script>
+    <script type="text/javascript">
+		 $(document).ready(function() {
+        $("#insert").click(function() {
+            var name = $("#name").val();
+            var dataString = "name=" + name + "&insert=";
+            if ($.trim(name).length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost/appsaya2/www/add.php",
+                    data: dataString,
+                    crossDomain: true,
+                    cache: false,
+                    beforeSend: function() {
+                        $("#insert").val('Connecting...');
+                    },
+                    success: function(data) {
+                        if (data == "success") {
+                            alert("inserted");
+                            $("#insert").val('submit');
+                        } else if (data == "error") {
+                            alert("error");
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+    });
+	</script>
+</head>
+
+<body>
+	<div class="bar bar-header bar-assertive" style="margin-bottom:80px; font-family:Verdana, Geneva, sans-serif;"><div class="col text-left">Appsaya</div></div>
+    <br /><br /><br />
+    	<div id="wrapper"><div id="scroller">
+            <div class="inputWrap">
+                    <p><label class="item item-input"><input type="text" id="name" placeholder="Full Name"></label></p>
+                    <p><label id="staffSec" class="item item-input">
+                    	<input type="text" id="no" placeholder="Phone Number">
+                       </label></p>
+                       
+                    <div class="dateSec"><label class="item item-input">Date: &nbsp;<input type="date" id="date"></label></div>
+                    <br /><br /><br />
+                    <p><label class="item item-input"><input type="text" id="email" placeholder="Email"></label></p>
+                    <p> <label class="item item-input"><input type="text" id="service" placeholder="Sevice"></label></p>
+                    <p><label class="item item-input"><input type="text" id="slot" placeholder="Slot"></label></p>
+                    <p><select  class="item item-input">
+                            	<option>IFFAH</option>
+                                <option>SYAZELA</option>
+                                <option>AYU</option>
+                            </select></p>
+                    	
+                    <div class="col text-center addButWrap">
+                        <input type="button" id="insert" class="button button-assertive" value="Add Appoinment" />
+                    </div>
+              </div>
+          </div></div>
+    
+     <div class="bar bar-assertive bar-footer">
+    	<div class="col text-center"><a href="#"><img src="images/whiteplus3.png" width="24" height="25" /></a></div>
+   	  <div class="col text-center"><a href="#"><img src="images/whitebell.png" width="24" height="25" /> </a></div>
+      <div class="col text-center"><a href="#"><img src="images/whitedot3.png" width="24" height="25" /></a></div>
+    </div>
+</body>
+</html>
